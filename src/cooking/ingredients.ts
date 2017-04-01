@@ -49,6 +49,13 @@ export const tortilla = makeIngredient({
   cuisine: 'gerudo',
   foodTypes: 'carb',
 });
+export const pepper = makeIngredient({
+  name: 'Hot Pepper',
+  hearts: 4,
+  cuisine: 'gerudo',
+  foodTypes: 'produce',
+  flavorProfiles: 'spicy',
+});
 
 interface IngredientInList extends Readonly<Ingredient> {
   key: string;
@@ -66,4 +73,5 @@ export default makeList({
   creme,
   artichoke,
   tortilla,
+  pepper,
 });

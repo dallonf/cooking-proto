@@ -3,11 +3,11 @@ export type FoodType = 'protein' | 'produce' | 'carb' | 'dairy';
 export type FlavorProfile = 'aromatic' | 'acidic' | 'tart' | 'sweet' | 'spicy';
 
 export interface Ingredient {
-  name: string;
-  cuisine?: Cuisine;
-  hearts: number;
-  foodTypes: FoodType[];
-  flavorProfiles: FlavorProfile[];
+  readonly name: string;
+  readonly cuisine?: Cuisine;
+  readonly hearts: number;
+  readonly foodTypes: FoodType[];
+  readonly flavorProfiles: FlavorProfile[];
 }
 interface MakeIngredientInput { 
   name: string;
@@ -15,6 +15,19 @@ interface MakeIngredientInput {
   hearts: number;
   foodTypes?: FoodType[] | FoodType;
   flavorProfiles?: FlavorProfile[] | FlavorProfile;
+}
+export function makeIngredient(input: MakeIngredientInput): Ingredient {
+  return ({
+    ...input,
+    foodTypes: ensureArray<FoodType>(input.foodTypes),
+    flavorProfiles: ensureArray<FlavorProfile>(input.flavorProfiles)
+  });
+};
+
+export interface Meal {
+  readonly name: string;
+  readonly description?: string;
+  readonly hearts: number;
 }
 
 function ensureArray<T extends string>(input: T | T[] | undefined) {
@@ -26,11 +39,3 @@ function ensureArray<T extends string>(input: T | T[] | undefined) {
     return [];
   }
 }
-
-export function makeIngredient(input: MakeIngredientInput): Readonly<Ingredient> {
-  return ({
-    ...input,
-    foodTypes: ensureArray<FoodType>(input.foodTypes),
-    flavorProfiles: ensureArray<FlavorProfile>(input.flavorProfiles)
-  });
-};

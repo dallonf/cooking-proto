@@ -1,0 +1,6 @@
+exports[`snapshots fajita 1`] = `
+Object {
+  "hearts": 10,
+  "name": "A Meal",
+}
+`;
