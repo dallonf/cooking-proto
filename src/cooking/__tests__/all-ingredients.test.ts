@@ -1,4 +1,4 @@
-import * as ingredients from '../ingredients';
+import ingredients from '../ingredients';
 import { ingredientListForKeyList, ingredientForKey } from '../all-ingredients';
 
 describe('ingredientListForKeyList', () => {

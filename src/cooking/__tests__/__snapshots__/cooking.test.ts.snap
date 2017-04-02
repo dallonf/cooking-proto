@@ -1,6 +1,11 @@
 exports[`snapshots fajita 1`] = `
 Object {
   "hearts": 10,
+  "ingredients": Array [
+    "tortilla",
+    "pepper",
+    "artichoke",
+  ],
   "name": "A Meal",
 }
 `;

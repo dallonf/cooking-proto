@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Meal } from '../types';
+import { Ingredient, Meal } from '../types';
 import cookMeal from '../cooking/cooking';
-import { ingredientListForKeyList, default as allIngredients, IngredientInList } from '../cooking/all-ingredients';
+import { ingredientListForKeyList, default as allIngredients } from '../cooking/all-ingredients';
 import './App.css';
 
 interface AppState {
@@ -17,7 +17,7 @@ class App extends React.Component<null, AppState> {
     cookedMeal: null,
   };
 
-  handleIngredientClick = (ingredient: IngredientInList) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+  handleIngredientClick = (ingredient: Ingredient) => (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     this.setState(state => ({
       holding: [...state.holding, ingredient.key]

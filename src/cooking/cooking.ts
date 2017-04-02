@@ -11,5 +11,6 @@ export default function cook(ingredients: Ingredient[]): Meal {
   return {
     name,
     hearts,
+    ingredients: ingredients.map(i => i.key),
   };
 }
