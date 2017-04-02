@@ -1,7 +1,7 @@
 import ingredientsMap from './ingredients';
 import { Ingredient } from '../types';
 
-interface IngredientInList extends Ingredient {
+export interface IngredientInList extends Ingredient {
   readonly key: string;
 }
 
