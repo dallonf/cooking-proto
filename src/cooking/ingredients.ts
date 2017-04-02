@@ -57,21 +57,14 @@ export const pepper = makeIngredient({
   flavorProfiles: 'spicy',
 });
 
-interface IngredientInList extends Readonly<Ingredient> {
-  key: string;
-}
-
-function makeList(ingredients: { [key: string]: Readonly<Ingredient> }): IngredientInList[] {
-  return Object.keys(ingredients).map(key => ({...ingredients[key], key}));
-}
-export default makeList({
+export default {
   rockSalt,
   octorokTentacle,
   duck,
   bread,
   buttermilk,
-  creme,
+  creme, 
   artichoke,
   tortilla,
   pepper,
-});
+} as { [key: string]: Ingredient | undefined };
