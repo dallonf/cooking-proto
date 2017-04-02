@@ -1,11 +1,42 @@
-exports[`snapshots fajita 1`] = `
+exports[`snapshots butterchoke 1`] = `
 Object {
   "effects": Array [],
+  "hearts": 5,
+  "ingredients": Array [
+    "artichoke",
+    "buttermilk",
+  ],
+  "name": "A Meal",
+}
+`;
+
+exports[`snapshots fajita 1`] = `
+Object {
+  "effects": Array [
+    Object {
+      "combineType": "duration",
+      "duration": 90,
+      "level": 1,
+      "type": "stealth",
+    },
+  ],
   "hearts": 10,
   "ingredients": Array [
     "tortilla",
     "pepper",
     "artichoke",
+  ],
+  "name": "A Meal",
+}
+`;
+
+exports[`snapshots roast duck 1`] = `
+Object {
+  "effects": Array [],
+  "hearts": 6,
+  "ingredients": Array [
+    "duck",
+    "rockSalt",
   ],
   "name": "A Meal",
 }

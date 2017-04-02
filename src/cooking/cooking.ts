@@ -8,10 +8,15 @@ export default function cook(ingredients: Ingredient[]): Meal {
   } else {
     name = 'Dubious Food';
   }
+
+  const effects = ingredients
+    .filter(i => i.primaryAttribute && i.primaryAttribute.trigger(ingredients))
+    .map(i => i.primaryAttribute!.effect);
+
   return {
     name,
     hearts,
     ingredients: ingredients.map(i => i.key),
-    effects: [],
+    effects,
   };
 }

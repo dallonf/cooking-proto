@@ -30,17 +30,46 @@ describe('effects', () => {
         }
       }
     };
-    const meal = cook([ dummyIngredient, ingredients.duck ]);
+    const meal = cook([ dummyIngredient, ingredients.artichoke ]);
     expect(meal.effects).toContainEqual({
       type: 'defenseUp',
       duration: 30,
       level: 1,
     });
   });
+
+  it('should fail to activate an effect', function() {
+    const dummyIngredient: Ingredient = {
+      key: 'cheezWiz',
+      name: 'Cheez-Wiz',
+      hearts: 2,
+      cuisine: 'rito',
+      foodTypes: ['dairy'],
+      flavorProfiles: [],
+      primaryAttribute: {
+        trigger: () => false,
+        effect: {
+          type: 'defenseUp',
+          duration: 30,
+          level: 1,
+        }
+      }
+    };
+    const meal = cook([ dummyIngredient, ingredients.artichoke ]);
+    expect(meal.effects).toEqual([]);
+  });
 });
 
 describe('snapshots', function() {
-  it('fajita', function() {
+  test('butterchoke', function() {
+    const meal = cook([ ingredients.artichoke, ingredients.buttermilk ]);
+    expect(meal).toMatchSnapshot();
+  });
+  test('roast duck', function() {
+    const meal = cook([ ingredients.duck, ingredients.rockSalt ]);
+    expect(meal).toMatchSnapshot();
+  });
+  test('fajita', function() {
     const meal = cook([ ingredients.tortilla, ingredients.pepper, ingredients.artichoke ]);
     expect(meal).toMatchSnapshot();
   });

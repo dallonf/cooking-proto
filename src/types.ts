@@ -1,7 +1,7 @@
 export type Cuisine = 'hylian' | 'zoran' | 'gerudo' | 'rito';
 export type FoodType = 'protein' | 'produce' | 'carb' | 'dairy';
 export type FlavorProfile = 'aromatic' | 'acidic' | 'tart' | 'sweet' | 'spicy';
-export type BuffType = 'attackUp' | 'defenseUp' | 'heatResist' | 'coldResist';
+export type BuffType = 'attackUp' | 'defenseUp' | 'heatResist' | 'coldResist' | 'stealth';
 
 interface BuffEffect {
   readonly type: BuffType;
