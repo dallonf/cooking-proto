@@ -12,5 +12,6 @@ export default function cook(ingredients: Ingredient[]): Meal {
     name,
     hearts,
     ingredients: ingredients.map(i => i.key),
+    effects: [],
   };
 }

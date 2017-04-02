@@ -46,9 +46,20 @@ const ingredientsMap = makeIngredients({
   },
   tortilla: {
     name: 'Tortilla',
+    description: 'A flat bread that forms the base of many Gerudo dishes.' + 
+      'Combining it with other Gerudo ingredients will make you a better, sneakier thief!',
     hearts: 2,
     cuisine: 'gerudo',
     foodTypes: 'carb',
+    primaryAttribute: {
+      effect: {
+        type: 'stealth',
+        duration: 90,
+        level: 1,
+        combineType: 'duration',
+      },
+      trigger: (recipe) => recipe.filter(i => i.cuisine === 'gerudo').length >= 2,
+    },
   },
   pepper: {
     name: 'Hot Pepper',
