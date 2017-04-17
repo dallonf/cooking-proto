@@ -7,6 +7,12 @@ Object {
       "level": 2,
       "type": "buff",
     },
+    Object {
+      "buffType": "attackUp",
+      "duration": 20,
+      "level": 1,
+      "type": "buff",
+    },
   ],
   "hearts": 5,
   "ingredients": Array [
