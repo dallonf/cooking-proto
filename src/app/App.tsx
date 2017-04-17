@@ -70,14 +70,17 @@ class App extends React.Component<null, AppState> {
         <ul>
           {ingredients.map(i => (
             <li key={i.key}>
-              {canHoldMore
-                ? (
-                  <a href="#" onClick={this.handleIngredientClick(i)}>
-                    {i.name}
-                  </a>
-                )
-                : i.name
-              }
+              <div>
+                {canHoldMore
+                  ? (
+                    <a href="#" onClick={this.handleIngredientClick(i)}>
+                      {i.name}
+                    </a>
+                  )
+                  : i.name
+                }
+              </div>
+              <p>{i.description}</p>
             </li>
           ))}
         </ul>

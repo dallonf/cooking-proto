@@ -27,7 +27,7 @@ export interface Ingredient {
 
   readonly primaryAttribute?: IngredientAttribute;
 }
-interface MakeIngredientInput {
+export interface MakeIngredientInput {
   name: string;
   description?: string;
   cuisine?: Cuisine;

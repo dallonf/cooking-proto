@@ -1,50 +1,49 @@
-import { makeIngredients } from '../types';
+import { makeIngredients, MakeIngredientInput } from '../types';
 
-const ingredientsMap = makeIngredients({
-  rockSalt: {
+const rockSalt: MakeIngredientInput = {
     name: 'Rock Salt',
     hearts: 1,
-  },
-  octorokTentacle: {
+};
+const octorokTentacle: MakeIngredientInput = {
     name: 'Octorok Tentacle',
     hearts: 5,
     cuisine: 'zoran',
     foodTypes: 'protein'
-  },
-  duck: {
+};
+const duck: MakeIngredientInput = {
     name: 'Duck',
     hearts: 5,
     cuisine: 'zoran',
     foodTypes: 'protein',
-  },
-  bread: {
+};
+const bread: MakeIngredientInput = {
     name: 'Bread',
     hearts: 2,
     cuisine: 'hylian',
     foodTypes: 'carb',
-  },
-  buttermilk: {
+};
+const buttermilk: MakeIngredientInput = {
     name: 'Buttermilk',
     hearts: 1,
     cuisine: 'hylian',
     foodTypes: 'dairy',
     flavorProfiles: 'acidic',
-  },
-  creme: {
+};
+const creme: MakeIngredientInput = {
     name: 'Créme',
     hearts: 2,
     cuisine: 'rito',
     foodTypes: 'dairy',
     flavorProfiles: 'sweet',
-  },
-  artichoke: {
+};
+const artichoke: MakeIngredientInput = {
     name: 'Artichoke',
     hearts: 4,
     cuisine: 'rito',
     foodTypes: 'produce',
     flavorProfiles: 'tart'
-  },
-  tortilla: {
+};
+const tortilla: MakeIngredientInput = {
     name: 'Tortilla',
     description: 'A flat bread that forms the base of many Gerudo dishes.' + 
       'Combining it with other Gerudo ingredients will make you a better, sneakier thief!',
@@ -60,14 +59,34 @@ const ingredientsMap = makeIngredients({
       },
       trigger: (recipe) => recipe.filter(i => i.cuisine === 'gerudo').length >= 2,
     },
-  },
-  pepper: {
+};
+const pepper: MakeIngredientInput = {
     name: 'Hot Pepper',
     hearts: 4,
     cuisine: 'gerudo',
     foodTypes: 'produce',
     flavorProfiles: 'spicy',
-  },
+    primaryAttribute: {
+      trigger: () => true,
+      effect: {
+        type: 'buff',
+        buffType: 'coldResist',
+        level: 1,
+        duration: 24
+      }
+    }
+};
+
+const ingredientsMap = makeIngredients({
+  rockSalt,
+  octorokTentacle,
+  duck,
+  bread,
+  buttermilk,
+  creme,
+  artichoke,
+  tortilla,
+  pepper,
 });
 
 export default ingredientsMap;
