@@ -10,6 +10,18 @@ Object {
 }
 `;
 
+exports[`snapshots dubious cream 1`] = `
+Object {
+  "effects": Array [],
+  "hearts": -5,
+  "ingredients": Array [
+    "creme",
+    "buttermilk",
+  ],
+  "name": "Dubious Food",
+}
+`;
+
 exports[`snapshots mushroom and duck fajita 1`] = `
 Object {
   "effects": Array [

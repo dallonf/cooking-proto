@@ -32,11 +32,29 @@ const buttermilk: MakeIngredientInput = {
     flavorProfiles: 'acidic',
 };
 const creme: MakeIngredientInput = {
-    name: 'Créme',
-    hearts: 2,
-    cuisine: 'rito',
-    foodTypes: 'dairy',
-    flavorProfiles: 'sweet',
+  name: 'Créme',
+  description: 'A traditional Rito sweet cream.' 
+    + 'Increases attack power, but curdles if mixed with acidic ingredients.',
+  hearts: 4,
+  cuisine: 'rito',
+  foodTypes: 'dairy',
+  flavorProfiles: 'sweet',
+  primaryAttribute: {
+    trigger: () => true,
+    effect: {
+      type: 'buff',
+      buffType: 'attackUp',
+      level: 1,
+      duration: 74
+    }
+  },
+  negativeAttribute: {
+    trigger: matchIngredients(i => i.flavorProfiles.indexOf('acidic') !== -1, 1),
+    effect: {
+      type: 'hearts',
+      amount: -10,
+    },
+  },
 };
 const artichoke: MakeIngredientInput = {
     name: 'Artichoke',

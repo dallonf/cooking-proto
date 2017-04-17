@@ -105,6 +105,36 @@ describe('effects', () => {
       level: 2,
     });
   });
+
+  it('should prioritize negative effect over primary effect', function() {
+    const dummyIngredient: Ingredient = {
+      key: 'mw',
+      name: 'Miracle Whip',
+      hearts: 4,
+      cuisine: 'zoran',
+      flavorProfiles: [],
+      foodTypes: ['dairy'],
+      primaryAttribute: {
+        trigger: () => true,
+        effect: {
+          type: 'buff',
+          buffType: 'defenseUp',
+          duration: 88,
+          level: 1,
+        },
+      },
+      negativeAttribute: {
+        trigger: () => true,
+        effect: {
+          type: 'hearts',
+          amount: -20,
+        },
+      },
+    };
+    const meal = cook([ dummyIngredient ]);
+    expect(meal.name).toEqual('Dubious Food');
+    expect(meal.effects).toEqual([]);
+  });
 });
 
 describe('snapshots', function() {
@@ -122,6 +152,11 @@ describe('snapshots', function() {
   });
   test('mushroom and duck fajita', function() {
     const meal = cook([ ingredients.tortilla, ingredients.pepper, ingredients.duck, ingredients.silentShroom ]);
+    expect(meal).toMatchSnapshot();
+  });
+  test('dubious cream', function() {
+    const meal = cook([ ingredients.creme, ingredients.buttermilk ]);
+    expect(meal.name).toEqual('Dubious Food');
     expect(meal).toMatchSnapshot();
   });
 });

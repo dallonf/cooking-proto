@@ -9,10 +9,14 @@ export interface BuffEffect {
   readonly level: number;
   readonly duration: number;
 }
-export type Effect = BuffEffect;
+export interface HeartEffect {
+  readonly type: 'hearts';
+  readonly amount: number;
+}
+export type Effect = BuffEffect | HeartEffect;
 
 interface IngredientAttribute {
-  readonly trigger: (recipe: Ingredient[]) => boolean;
+  readonly trigger: (recipe: ReadonlyArray<Ingredient>) => boolean;
   readonly effect: Effect;
 }
 
@@ -26,6 +30,7 @@ export interface Ingredient {
   readonly flavorProfiles: FlavorProfile[];
 
   readonly primaryAttribute?: IngredientAttribute;
+  readonly negativeAttribute?: IngredientAttribute;
 }
 export interface MakeIngredientInput {
   name: string;
@@ -35,6 +40,7 @@ export interface MakeIngredientInput {
   foodTypes?: FoodType[] | FoodType;
   flavorProfiles?: FlavorProfile[] | FlavorProfile;
   primaryAttribute?: IngredientAttribute;
+  negativeAttribute?: IngredientAttribute;
 };
 
 export function makeIngredients<T extends { [key: string]: MakeIngredientInput }>(input: T):
