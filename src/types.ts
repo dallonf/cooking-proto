@@ -1,7 +1,7 @@
 export type Cuisine = 'hylian' | 'zoran' | 'gerudo' | 'rito';
 export type FoodType = 'protein' | 'produce' | 'carb' | 'dairy';
 export type FlavorProfile = 'aromatic' | 'acidic' | 'tart' | 'sweet' | 'spicy';
-export type BuffType = 'attackUp' | 'defenseUp' | 'heatResist' | 'coldResist' | 'stealth';
+export type BuffType = 'attackUp' | 'defenseUp' | 'heatResist' | 'coldResist' | 'stealth' | 'speed';
 
 export interface BuffEffect {
   readonly type: 'buff';
@@ -13,7 +13,11 @@ export interface HeartEffect {
   readonly type: 'hearts';
   readonly amount: number;
 }
-export type Effect = BuffEffect | HeartEffect;
+export interface BuffDurationEffect {
+  readonly type: 'buffDurationIncrease';
+  readonly amount: number;
+}
+export type Effect = BuffEffect | HeartEffect | BuffDurationEffect;
 
 interface IngredientAttribute {
   readonly trigger: (recipe: ReadonlyArray<Ingredient>) => boolean;
@@ -30,6 +34,7 @@ export interface Ingredient {
   readonly flavorProfiles: FlavorProfile[];
 
   readonly primaryAttribute?: IngredientAttribute;
+  readonly secondaryAttribute?: IngredientAttribute;
   readonly negativeAttribute?: IngredientAttribute;
 }
 export interface MakeIngredientInput {
@@ -40,6 +45,7 @@ export interface MakeIngredientInput {
   foodTypes?: FoodType[] | FoodType;
   flavorProfiles?: FlavorProfile[] | FlavorProfile;
   primaryAttribute?: IngredientAttribute;
+  secondaryAttribute?: IngredientAttribute;
   negativeAttribute?: IngredientAttribute;
 };
 

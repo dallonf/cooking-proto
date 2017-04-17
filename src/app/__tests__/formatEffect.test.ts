@@ -20,3 +20,13 @@ it('should format a medium-level buff with a complex type name', function() {
   };
   expect(formatEffect(effect)).toEqual('A medium-level cold resistance for 0:42');
 });
+
+it('should format a debuff', function() {
+  const effect: BuffEffect = {
+    type: 'buff',
+    buffType: 'stealth',
+    duration: 90,
+    level: -1
+  };
+  expect(formatEffect(effect)).toEqual('A low-level stealth penalty for 1:30');
+});

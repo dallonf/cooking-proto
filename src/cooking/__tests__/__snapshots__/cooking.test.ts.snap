@@ -1,6 +1,13 @@
 exports[`snapshots butterchoke 1`] = `
 Object {
-  "effects": Array [],
+  "effects": Array [
+    Object {
+      "buffType": "defenseUp",
+      "duration": 120,
+      "level": 2,
+      "type": "buff",
+    },
+  ],
   "hearts": 5,
   "ingredients": Array [
     "artichoke",
@@ -27,8 +34,8 @@ Object {
   "effects": Array [
     Object {
       "buffType": "stealth",
-      "duration": 140,
-      "level": 2,
+      "duration": 340,
+      "level": -2,
       "type": "buff",
     },
     Object {
@@ -43,6 +50,32 @@ Object {
     "tortilla",
     "pepper",
     "duck",
+    "silentShroom",
+  ],
+  "name": "A Meal",
+}
+`;
+
+exports[`snapshots rito/zora fusion 1`] = `
+Object {
+  "effects": Array [
+    Object {
+      "buffType": "defenseUp",
+      "duration": 120,
+      "level": 2,
+      "type": "buff",
+    },
+    Object {
+      "buffType": "stealth",
+      "duration": 50,
+      "level": 1,
+      "type": "buff",
+    },
+  ],
+  "hearts": 12,
+  "ingredients": Array [
+    "octorokTentacle",
+    "artichoke",
     "silentShroom",
   ],
   "name": "A Meal",
@@ -74,6 +107,12 @@ Object {
       "buffType": "coldResist",
       "duration": 24,
       "level": 1,
+      "type": "buff",
+    },
+    Object {
+      "buffType": "defenseUp",
+      "duration": 120,
+      "level": 2,
       "type": "buff",
     },
   ],

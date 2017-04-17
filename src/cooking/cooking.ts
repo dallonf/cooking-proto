@@ -9,6 +9,8 @@ export default function cook(ingredients: Ingredient[]): Meal {
         return i.negativeAttribute.effect;
       } else if (i.primaryAttribute && i.primaryAttribute.trigger(ingredients)) {
         return i.primaryAttribute.effect;
+      } else if (i.secondaryAttribute && i.secondaryAttribute.trigger(ingredients)) {
+        return i.secondaryAttribute.effect;
       } else {
         return undefined; 
       }
@@ -26,8 +28,8 @@ export default function cook(ingredients: Ingredient[]): Meal {
       } else {
         const combined: BuffEffect = {
           ...existing,
-          // Use the maxium level
-          level: Math.max(existing.level, e.level),
+          // Use the maximum level - and the minimum sign
+          level: Math.max(Math.abs(existing.level), Math.abs(e.level)) * Math.sign(Math.min(existing.level, e.level)),
           // Sum durations
           duration: existing.duration + e.duration,
         };
@@ -37,6 +39,19 @@ export default function cook(ingredients: Ingredient[]): Meal {
     }, {} as { [key in BuffType]: BuffEffect | undefined });
 
   effects = [...nonBuffs, ...Object.keys(combinedBuffsByType).map(t => combinedBuffsByType[t])];
+
+  // Extend buffs
+  const extendBuffsAmount = effects.map(e => e.type === 'buffDurationIncrease' ? e.amount : 0)
+    .reduce((a, b) => a + b, 0);
+  effects = effects
+    .filter(e => e.type !== 'buffDurationIncrease')
+    .map(e => {
+      if (e.type === 'buff') {
+        return {...e, duration: e.duration + extendBuffsAmount};
+      } else { 
+        return e;
+      }
+    });
 
   // Add heart effects to meal itself
   const heartEffects = (effects as ReadonlyArray<Effect>)
