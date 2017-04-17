@@ -15,8 +15,8 @@ it('should keep track of what ingredients were used', () => {
 describe('effects', () => {
   it('should activate an effect', function() {
     const dummyIngredient: Ingredient = {
-      key: 'cheezWiz',
-      name: 'Cheez-Wiz',
+      key: 'cheezWhiz',
+      name: 'Cheez-Whiz',
       hearts: 2,
       cuisine: 'rito',
       foodTypes: ['dairy'],
@@ -42,8 +42,8 @@ describe('effects', () => {
 
   it('should fail to activate an effect', function() {
     const dummyIngredient: Ingredient = {
-      key: 'cheezWiz',
-      name: 'Cheez-Wiz',
+      key: 'cheezWhiz',
+      name: 'Cheez-Whiz',
       hearts: 2,
       cuisine: 'rito',
       foodTypes: ['dairy'],
@@ -61,6 +61,50 @@ describe('effects', () => {
     const meal = cook([ dummyIngredient, ingredients.artichoke ]);
     expect(meal.effects).toEqual([]);
   });
+
+  it('should combine effects', function() {
+    const dummyIngredient1: Ingredient = {
+      key: 'cheezWhiz',
+      name: 'Cheez-Whiz',
+      hearts: 2,
+      cuisine: 'rito',
+      foodTypes: ['dairy'],
+      flavorProfiles: [],
+      primaryAttribute: {
+        trigger: () => true,
+        effect: {
+          type: 'buff',
+          buffType: 'attackUp',
+          duration: 90,
+          level: 1,
+        }
+      }
+    };
+    const dummyIngredient2: Ingredient = {
+      key: 'twinkie',
+      name: 'Twinkie',
+      cuisine: 'hylian',
+      hearts: 3,
+      foodTypes: [],
+      flavorProfiles: ['sweet'],
+      primaryAttribute: {
+        trigger: () => true,
+        effect: {
+          type: 'buff',
+          buffType: 'attackUp',
+          duration: 32,
+          level: 2,
+        },
+      },
+    };
+    const meal = cook([ dummyIngredient1, dummyIngredient2 ]);
+    expect(meal.effects).toContainEqual({
+      type: 'buff',
+      buffType: 'attackUp',
+      duration: 122,
+      level: 2,
+    });
+  });
 });
 
 describe('snapshots', function() {
@@ -72,8 +116,12 @@ describe('snapshots', function() {
     const meal = cook([ ingredients.duck, ingredients.rockSalt ]);
     expect(meal).toMatchSnapshot();
   });
-  test('fajita', function() {
+  test('veggie fajita', function() {
     const meal = cook([ ingredients.tortilla, ingredients.pepper, ingredients.artichoke ]);
+    expect(meal).toMatchSnapshot();
+  });
+  test('mushroom and duck fajita', function() {
+    const meal = cook([ ingredients.tortilla, ingredients.pepper, ingredients.duck, ingredients.silentShroom ]);
     expect(meal).toMatchSnapshot();
   });
 });

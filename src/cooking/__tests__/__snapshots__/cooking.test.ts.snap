@@ -10,21 +10,28 @@ Object {
 }
 `;
 
-exports[`snapshots fajita 1`] = `
+exports[`snapshots mushroom and duck fajita 1`] = `
 Object {
   "effects": Array [
     Object {
       "buffType": "stealth",
-      "duration": 90,
+      "duration": 140,
+      "level": 2,
+      "type": "buff",
+    },
+    Object {
+      "buffType": "coldResist",
+      "duration": 24,
       "level": 1,
       "type": "buff",
     },
   ],
-  "hearts": 10,
+  "hearts": 14,
   "ingredients": Array [
     "tortilla",
     "pepper",
-    "artichoke",
+    "duck",
+    "silentShroom",
   ],
   "name": "A Meal",
 }
@@ -37,6 +44,32 @@ Object {
   "ingredients": Array [
     "duck",
     "rockSalt",
+  ],
+  "name": "A Meal",
+}
+`;
+
+exports[`snapshots veggie fajita 1`] = `
+Object {
+  "effects": Array [
+    Object {
+      "buffType": "stealth",
+      "duration": 90,
+      "level": 2,
+      "type": "buff",
+    },
+    Object {
+      "buffType": "coldResist",
+      "duration": 24,
+      "level": 1,
+      "type": "buff",
+    },
+  ],
+  "hearts": 10,
+  "ingredients": Array [
+    "tortilla",
+    "pepper",
+    "artichoke",
   ],
   "name": "A Meal",
 }

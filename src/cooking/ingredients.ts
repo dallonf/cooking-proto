@@ -1,7 +1,9 @@
 import { makeIngredients, MakeIngredientInput } from '../types';
+import { matchIngredients } from './triggers';
 
 const rockSalt: MakeIngredientInput = {
     name: 'Rock Salt',
+    description: 'Enhances the flavor of many dishes',
     hearts: 1,
 };
 const octorokTentacle: MakeIngredientInput = {
@@ -55,13 +57,15 @@ const tortilla: MakeIngredientInput = {
         type: 'buff',
         buffType: 'stealth',
         duration: 90,
-        level: 1,
+        level: 2,
       },
-      trigger: (recipe) => recipe.filter(i => i.cuisine === 'gerudo').length >= 2,
+      trigger: matchIngredients(i => i.cuisine === 'gerudo'),
     },
 };
 const pepper: MakeIngredientInput = {
     name: 'Hot Pepper',
+    description: 'A spicy pepper from the Gerudo Desert. ' +
+      'When cooked into a meal, the firey flavor helps to fend off the cold.',
     hearts: 4,
     cuisine: 'gerudo',
     foodTypes: 'produce',
@@ -76,6 +80,23 @@ const pepper: MakeIngredientInput = {
       }
     }
 };
+const silentShroom: MakeIngredientInput = {
+  name: 'Silent Shroom',
+  description: 'A mushroom favored by the Rito. When paired with another protein, it sharpens your ' +
+    'senses and quiets your steps.',
+  hearts: 3,
+  cuisine: 'rito',
+  foodTypes: ['produce', 'protein'],
+  primaryAttribute: {
+    trigger: matchIngredients(i => i.cuisine === 'gerudo'),
+    effect: {
+      type: 'buff',
+      buffType: 'stealth',
+      level: 1,
+      duration: 50,
+    },
+  },
+};
 
 const ingredientsMap = makeIngredients({
   rockSalt,
@@ -85,6 +106,7 @@ const ingredientsMap = makeIngredients({
   buttermilk,
   creme,
   artichoke,
+  silentShroom,
   tortilla,
   pepper,
 });

@@ -4,7 +4,7 @@ export type FlavorProfile = 'aromatic' | 'acidic' | 'tart' | 'sweet' | 'spicy';
 export type BuffType = 'attackUp' | 'defenseUp' | 'heatResist' | 'coldResist' | 'stealth';
 
 export interface BuffEffect {
-  type: 'buff';
+  readonly type: 'buff';
   readonly buffType: BuffType;
   readonly level: number;
   readonly duration: number;
