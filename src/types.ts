@@ -3,13 +3,13 @@ export type FoodType = 'protein' | 'produce' | 'carb' | 'dairy';
 export type FlavorProfile = 'aromatic' | 'acidic' | 'tart' | 'sweet' | 'spicy';
 export type BuffType = 'attackUp' | 'defenseUp' | 'heatResist' | 'coldResist' | 'stealth';
 
-interface BuffEffect {
-  readonly type: BuffType;
+export interface BuffEffect {
+  type: 'buff';
+  readonly buffType: BuffType;
   readonly level: number;
   readonly duration: number;
-  readonly combineType?: 'level' | 'duration';
 }
-type Effect = BuffEffect;
+export type Effect = BuffEffect;
 
 interface IngredientAttribute {
   readonly trigger: (recipe: Ingredient[]) => boolean;

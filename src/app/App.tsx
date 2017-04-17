@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Ingredient, Meal } from '../types';
 import cookMeal from '../cooking/cooking';
 import { ingredientListForKeyList, default as allIngredients } from '../cooking/all-ingredients';
+import formatEffect from './formatEffect';
 import './App.css';
 
 interface AppState {
@@ -49,6 +50,9 @@ class App extends React.Component<null, AppState> {
           <h2>{cookedMeal.name}</h2>
           <ul>
             <li>Heals {cookedMeal.hearts} hearts</li>
+            { cookedMeal.effects.map((e, i) => 
+              <li key={i}>{formatEffect(e)}</li>
+            ) }
           </ul>
           <p>
             {cookedMeal.description}

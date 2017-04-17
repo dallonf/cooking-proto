@@ -24,7 +24,8 @@ describe('effects', () => {
       primaryAttribute: {
         trigger: (ingredients) => ingredients.filter(i => i.cuisine === 'rito').length >= 2,
         effect: {
-          type: 'defenseUp',
+          type: 'buff',
+          buffType: 'defenseUp',
           duration: 30,
           level: 1,
         }
@@ -32,7 +33,8 @@ describe('effects', () => {
     };
     const meal = cook([ dummyIngredient, ingredients.artichoke ]);
     expect(meal.effects).toContainEqual({
-      type: 'defenseUp',
+      type: 'buff',
+      buffType: 'defenseUp',
       duration: 30,
       level: 1,
     });
@@ -49,7 +51,8 @@ describe('effects', () => {
       primaryAttribute: {
         trigger: () => false,
         effect: {
-          type: 'defenseUp',
+          type: 'buff',
+          buffType: 'defenseUp',
           duration: 30,
           level: 1,
         }

@@ -53,10 +53,10 @@ const ingredientsMap = makeIngredients({
     foodTypes: 'carb',
     primaryAttribute: {
       effect: {
-        type: 'stealth',
+        type: 'buff',
+        buffType: 'stealth',
         duration: 90,
         level: 1,
-        combineType: 'duration',
       },
       trigger: (recipe) => recipe.filter(i => i.cuisine === 'gerudo').length >= 2,
     },

@@ -14,10 +14,10 @@ exports[`snapshots fajita 1`] = `
 Object {
   "effects": Array [
     Object {
-      "combineType": "duration",
+      "buffType": "stealth",
       "duration": 90,
       "level": 1,
-      "type": "stealth",
+      "type": "buff",
     },
   ],
   "hearts": 10,
