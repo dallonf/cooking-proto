@@ -27,36 +27,11 @@ const IngredientName = styled.span`
   font-weight: bold;
   flex: 1;
 `;
-
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const Button = styled.button`
-  flex: 1;
-  background: ${styles.PANEL_BG_COLOR};
-  border: none;
-  box-shadow: ${styles.PANEL_OUTLINE_SHADOW};
-  font-size: 20px;
-  height: 60px;
-  color: white;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-style: italic;
-  cursor: pointer;
-  ${styles.TRANSITION}
-
-  &:first-child {
-    margin-right: 8px;
-  }
-
-  &:hover, &:focus {
-    box-shadow: ${styles.PANEL_HIGHLIGHT_SHADOW};
-  }
-  &:active {
-    background: rgba(255,255,255,0.8);
-  }
-`;
-
+const Button = styled(styles.Button)` flex: 1; `;
 
 const CurrentRecipeList = (
   { 

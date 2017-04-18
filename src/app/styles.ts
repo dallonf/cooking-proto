@@ -21,3 +21,27 @@ export const Header = styled.h2`
   margin: 0;
   margin-top: 18px;
 `;
+
+export const Button = styled.button`
+  background: ${PANEL_BG_COLOR};
+  border: none;
+  box-shadow: ${PANEL_OUTLINE_SHADOW};
+  font-size: 20px;
+  height: 60px;
+  color: white;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: italic;
+  cursor: pointer;
+  ${TRANSITION}
+
+  &:first-child {
+    margin-right: 8px;
+  }
+
+  &:hover, &:focus {
+    box-shadow: ${PANEL_HIGHLIGHT_SHADOW};
+  }
+  &:active {
+    background: rgba(255,255,255,0.8);
+  }
+`;
