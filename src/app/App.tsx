@@ -38,7 +38,7 @@ class App extends React.Component<null, AppState> {
     ingredients: [...allIngredients.map(i => i.key)],
     hoverIngredientKey: null,
     holding: [],
-    cookedMeal: cookMeal([ingredientForKey('apple'), ingredientForKey('apple'), ingredientForKey('rockSalt')]),
+    cookedMeal: null,
   };
 
   handleIngredientClick = (ingredient: Ingredient) => (e: React.MouseEvent<HTMLElement>) => {

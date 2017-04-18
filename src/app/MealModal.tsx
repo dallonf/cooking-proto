@@ -35,7 +35,7 @@ const MealModal = ({ meal, onConfirm }: { meal: Meal, onConfirm: () => void }) =
       <Modal>
         <h2>{meal.name}</h2>
         <HR />
-        <ul>
+        <ul style={{ fontSize: 16 }}>
           <li>Heals {meal.hearts} hearts</li>
           { meal.effects.map((e, i) => 
             <li key={i}>{formatEffect(e)}</li>
