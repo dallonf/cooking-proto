@@ -21,6 +21,7 @@ export type Effect = BuffEffect | HeartEffect | BuffDurationEffect;
 
 interface IngredientAttribute {
   readonly trigger: (recipe: ReadonlyArray<Ingredient>) => boolean;
+  readonly triggerDescription?: string;
   readonly effect: Effect;
 }
 
@@ -33,8 +34,8 @@ export interface Ingredient {
   readonly foodTypes: FoodType[];
   readonly flavorProfiles: FlavorProfile[];
 
-  readonly primaryAttribute?: IngredientAttribute;
-  readonly secondaryAttribute?: IngredientAttribute;
+  readonly commonAttribute?: IngredientAttribute;
+  readonly specialAttribute?: IngredientAttribute;
   readonly negativeAttribute?: IngredientAttribute;
 }
 export interface MakeIngredientInput {
@@ -44,8 +45,8 @@ export interface MakeIngredientInput {
   hearts: number;
   foodTypes?: FoodType[] | FoodType;
   flavorProfiles?: FlavorProfile[] | FlavorProfile;
-  primaryAttribute?: IngredientAttribute;
-  secondaryAttribute?: IngredientAttribute;
+  commonAttribute?: IngredientAttribute;
+  specialAttribute?: IngredientAttribute;
   negativeAttribute?: IngredientAttribute;
 };
 

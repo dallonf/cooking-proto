@@ -5,7 +5,7 @@ const rockSalt: MakeIngredientInput = {
     name: 'Rock Salt',
     description: 'Enhances the flavor of many dishes.',
     hearts: 1,
-    primaryAttribute: {
+    commonAttribute: {
       trigger: () => true,
       effect: {
         type: 'buffDurationIncrease',
@@ -21,7 +21,7 @@ const octorokTentacle: MakeIngredientInput = {
     hearts: 5,
     cuisine: 'zoran',
     foodTypes: 'protein',
-    primaryAttribute: {
+    commonAttribute: {
       trigger: matchIngredients(i => i.key === 'rockSalt', 1),
       effect: {
         type: 'buff',
@@ -47,7 +47,7 @@ const duck: MakeIngredientInput = {
     hearts: 5,
     cuisine: 'zoran',
     foodTypes: 'protein',
-    primaryAttribute: {
+    commonAttribute: {
       trigger: matchIngredients(i => i.foodTypes.indexOf('produce') !== -1, 1),
       effect: {
         type: 'buff',
@@ -74,7 +74,7 @@ const bread: MakeIngredientInput = {
     hearts: 2,
     cuisine: 'hylian',
     foodTypes: 'carb',
-    primaryAttribute: {
+    commonAttribute: {
       trigger: matchIngredients(i => i.cuisine === 'hylian' && i.key !== 'bread', 1),
       effect: {
         type: 'buff',
@@ -83,7 +83,7 @@ const bread: MakeIngredientInput = {
         duration: 60,
       },
     },
-    secondaryAttribute: {
+    specialAttribute: {
       trigger: matchIngredients(i => i.foodTypes.indexOf('protein') !== -1, 1),
       effect: {
         type: 'buff',
@@ -102,7 +102,7 @@ const apple: MakeIngredientInput = {
     cuisine: 'hylian',
     foodTypes: ['produce'],
     flavorProfiles: ['sweet'],
-    primaryAttribute: {
+    commonAttribute: {
       trigger: matchIngredients(i => i.flavorProfiles.indexOf('sweet') !== -1 && i.key !== 'apple', 1),
       effect: {
         type: 'buff',
@@ -111,7 +111,7 @@ const apple: MakeIngredientInput = {
         duration: 50,
       }
     },
-    secondaryAttribute: {
+    specialAttribute: {
       trigger: matchIngredients(i => i.key === 'apple'),
       effect: {
         type: 'buff',
@@ -130,14 +130,14 @@ const buttermilk: MakeIngredientInput = {
     cuisine: 'hylian',
     foodTypes: 'dairy',
     flavorProfiles: 'acidic',
-    primaryAttribute: {
+    commonAttribute: {
       trigger: matchIngredients(i => i.flavorProfiles.indexOf('sweet') !== -1, 1),
       effect: {
         type: 'buffDurationIncrease',
         amount: 500,
       },
     },
-    secondaryAttribute: {
+    specialAttribute: {
       trigger: () => true,
       effect: {
         type: 'buff',
@@ -155,7 +155,7 @@ const creme: MakeIngredientInput = {
   cuisine: 'rito',
   foodTypes: 'dairy',
   flavorProfiles: 'sweet',
-  primaryAttribute: {
+  commonAttribute: {
     trigger: () => true,
     effect: {
       type: 'buff',
@@ -180,7 +180,7 @@ const artichoke: MakeIngredientInput = {
     cuisine: 'rito',
     foodTypes: 'produce',
     flavorProfiles: 'tart',
-    primaryAttribute: {
+    commonAttribute: {
       trigger: () => true,
       effect: {
         type: 'buff',
@@ -204,7 +204,7 @@ const tortilla: MakeIngredientInput = {
     hearts: 2,
     cuisine: 'gerudo',
     foodTypes: 'carb',
-    primaryAttribute: {
+    commonAttribute: {
       effect: {
         type: 'buff',
         buffType: 'stealth',
@@ -222,7 +222,7 @@ const pepper: MakeIngredientInput = {
     cuisine: 'gerudo',
     foodTypes: 'produce',
     flavorProfiles: 'spicy',
-    primaryAttribute: {
+    commonAttribute: {
       trigger: () => true,
       effect: {
         type: 'buff',
@@ -240,7 +240,7 @@ const silentShroom: MakeIngredientInput = {
   hearts: 3,
   cuisine: 'rito',
   foodTypes: ['produce', 'protein'],
-  primaryAttribute: {
+  commonAttribute: {
     trigger: matchIngredients(i => i.foodTypes.indexOf('protein') !== -1),
     effect: {
       type: 'buff',

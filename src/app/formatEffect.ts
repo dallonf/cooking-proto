@@ -1,6 +1,12 @@
 import { Effect } from '../types';
 import * as _ from 'lodash';
 
+const formatTime = (duration: number) => {
+  const minutes = Math.floor(duration / 60);
+  const seconds = Math.floor(duration % 60);
+  return `${minutes}:${_.padStart(seconds.toString(), 2, '0')}`;
+}
+
 export default function formatEffect(effect: Effect) {
   if (effect.type === 'buff') {
     let level: string;
@@ -38,12 +44,10 @@ export default function formatEffect(effect: Effect) {
       default:
         throw new Error(`Unrecognized buff type ${effect.buffType}`);
     }
-    //  = effect.buffType;
 
-    const minutes = Math.floor(effect.duration / 60);
-    const seconds = Math.floor(effect.duration % 60);
-
-    return `A ${level} ${buffType} for ${minutes}:${_.padStart(seconds.toString(), 2, '0')}`;
+    return `A ${level} ${buffType} for ${formatTime(effect.duration)}`;
+  } else if (effect.type === 'buffDurationIncrease') {
+    return `Increases other effects by ${formatTime(effect.amount)}`;
   } else {
     throw new Error(`Unexpected effect type "${effect.type}"`);
   }

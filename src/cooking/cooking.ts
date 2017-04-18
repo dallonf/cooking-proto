@@ -7,10 +7,10 @@ export default function cook(ingredients: Ingredient[]): Meal {
     .map(i => {
       if (i.negativeAttribute && i.negativeAttribute.trigger(ingredients)) {
         return i.negativeAttribute.effect;
-      } else if (i.primaryAttribute && i.primaryAttribute.trigger(ingredients)) {
-        return i.primaryAttribute.effect;
-      } else if (i.secondaryAttribute && i.secondaryAttribute.trigger(ingredients)) {
-        return i.secondaryAttribute.effect;
+      } else if (i.commonAttribute && i.commonAttribute.trigger(ingredients)) {
+        return i.commonAttribute.effect;
+      } else if (i.specialAttribute && i.specialAttribute.trigger(ingredients)) {
+        return i.specialAttribute.effect;
       } else {
         return undefined; 
       }

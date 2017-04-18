@@ -21,7 +21,7 @@ describe('effects', () => {
       cuisine: 'rito',
       foodTypes: ['dairy'],
       flavorProfiles: [],
-      primaryAttribute: {
+      commonAttribute: {
         trigger: (ingredients) => ingredients.filter(i => i.cuisine === 'rito').length >= 2,
         effect: {
           type: 'buff',
@@ -56,7 +56,7 @@ describe('effects', () => {
       cuisine: 'rito',
       foodTypes: ['dairy'],
       flavorProfiles: [],
-      primaryAttribute: {
+      commonAttribute: {
         trigger: () => false,
         effect: {
           type: 'buff',
@@ -78,7 +78,7 @@ describe('effects', () => {
       cuisine: 'rito',
       foodTypes: ['dairy'],
       flavorProfiles: [],
-      primaryAttribute: {
+      commonAttribute: {
         trigger: () => true,
         effect: {
           type: 'buff',
@@ -95,7 +95,7 @@ describe('effects', () => {
       hearts: 3,
       foodTypes: [],
       flavorProfiles: ['sweet'],
-      primaryAttribute: {
+      commonAttribute: {
         trigger: () => true,
         effect: {
           type: 'buff',
@@ -122,7 +122,7 @@ describe('effects', () => {
       cuisine: 'zoran',
       flavorProfiles: [],
       foodTypes: ['dairy'],
-      primaryAttribute: {
+      commonAttribute: {
         trigger: () => true,
         effect: {
           type: 'buff',
@@ -151,14 +151,14 @@ describe('effects', () => {
       hearts: 8,
       flavorProfiles: ['sweet'],
       foodTypes: [],
-      primaryAttribute: {
+      commonAttribute: {
         trigger: () => true,
         effect: {
           type: 'hearts',
           amount: 8,
         },
       },
-      secondaryAttribute: {
+      specialAttribute: {
         trigger: () => true,
         effect: {
           type: 'buff',
@@ -180,14 +180,14 @@ describe('effects', () => {
       hearts: 8,
       flavorProfiles: ['sweet'],
       foodTypes: [],
-      primaryAttribute: {
+      commonAttribute: {
         trigger: () => false,
         effect: {
           type: 'hearts',
           amount: 8,
         },
       },
-      secondaryAttribute: {
+      specialAttribute: {
         trigger: () => true,
         effect: {
           type: 'buff',
@@ -215,7 +215,7 @@ describe('effects', () => {
       cuisine: 'rito',
       foodTypes: ['dairy'],
       flavorProfiles: [],
-      primaryAttribute: {
+      commonAttribute: {
         trigger: () => true,
         effect: {
           type: 'buff',
@@ -232,7 +232,7 @@ describe('effects', () => {
       hearts: 3,
       foodTypes: [],
       flavorProfiles: ['sweet'],
-      primaryAttribute: {
+      commonAttribute: {
         trigger: () => true,
         effect: {
           type: 'buff',
@@ -259,7 +259,7 @@ describe('effects', () => {
       cuisine: 'rito',
       foodTypes: ['dairy'],
       flavorProfiles: [],
-      primaryAttribute: {
+      commonAttribute: {
         trigger: () => true,
         effect: {
           type: 'buff',
@@ -275,7 +275,7 @@ describe('effects', () => {
       hearts: 1,
       foodTypes: [],
       flavorProfiles: [],
-      primaryAttribute: {
+      commonAttribute: {
         trigger: () => true,
         effect: {
           type: 'buffDurationIncrease',
