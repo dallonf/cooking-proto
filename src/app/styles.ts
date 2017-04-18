@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+
 export const LINE_COLOR = 'rgba(255,255,255,0.4)';
 export const PANEL_BG_COLOR = 'rgba(0,0,0,0.6)';
 export const PANEL_OUTLINE_SHADOW = `
@@ -10,4 +12,12 @@ export const PANEL_HIGHLIGHT_SHADOW = `
 `;
 export const TRANSITION = `
   transition: all 250ms ease-out;
+`;
+
+export const Header = styled.h2`
+  text-align: center;
+  font-weight: normal;
+  font-size: 16px;
+  margin: 0;
+  margin-top: 18px;
 `;

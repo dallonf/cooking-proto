@@ -3,14 +3,6 @@ import styled from 'styled-components';
 import { Ingredient } from '../types';
 import * as styles from './styles';
 
-const Header = styled.h2`
-  text-align: center;
-  font-weight: normal;
-  font-size: 16px;
-  margin: 0;
-  margin-top: 18px;
-`;
-
 const HR = styled.hr`
   border: ${styles.LINE_COLOR} 1px solid;
   margin: 18px 32px;
@@ -48,9 +40,11 @@ const IngredientBox = styled.li`
   margin-right: 15px;
   margin-bottom: 15px;
 
-  &:active {
-    background: rgba(255,255,255,0.8);
-  }
+  ${(props: IngredientBoxProps) => props.disabled ? '' : `
+    &:active {
+      background: rgba(255,255,255,0.8);
+    }
+  `}
 `;
 
 const IngredientList = ({
@@ -68,7 +62,7 @@ const IngredientList = ({
     canHoldMore: boolean,
   }) => (
   <div>
-    <Header>Ingredients</Header>
+    <styles.Header>Ingredients</styles.Header>
     <HR />
     <List>
       {ingredients.map(i => (
