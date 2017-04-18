@@ -32,7 +32,7 @@ class App extends React.Component<null, AppState> {
     cookedMeal: null,
   };
 
-  handleIngredientClick = (ingredient: Ingredient) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+  handleIngredientClick = (ingredient: Ingredient) => (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     this.setState(state => ({
       holding: [...state.holding, ingredient.key]
