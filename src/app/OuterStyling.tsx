@@ -1,5 +1,7 @@
-import * as React from 'react';;
+import * as React from 'react';
 import styled from 'styled-components';
+
+const LINE_COLOR = 'rgba(255,255,255,0.4)';
 
 const Fullscreen = styled.div`
   display: flex;
@@ -10,11 +12,12 @@ const Fullscreen = styled.div`
 `;
 
 const AppWrapper = styled.div`
+  width: 1366px;
   height: 720px;
   overflow: hidden;
+  align-self: center;
 `;
 
-const LINE_COLOR = 'rgba(255,255,255,0.4)';
 interface LetterboxBarProps { direction?: 'top' | 'bottom'; };
 const LetterboxBar = styled.div`
   flex: 1;

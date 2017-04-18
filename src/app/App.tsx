@@ -1,9 +1,22 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { Ingredient, Meal } from '../types';
 import cookMeal from '../cooking/cooking';
 import { ingredientListForKeyList, default as allIngredients } from '../cooking/all-ingredients';
 import formatEffect from './formatEffect';
 import './App.css';
+
+const AppLayout = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+`;
+const LeftColumn = styled.div`
+  width: 670px;
+`;
+const RightColumn = styled.div`
+  flex: 1;
+`;
 
 interface AppState {
   ingredients: string[];
@@ -65,40 +78,44 @@ class App extends React.Component<null, AppState> {
     const ingredients = ingredientListForKeyList(this.state.ingredients);
     const canHoldMore = holding.length < 5;
     return (
-      <div>
-        <h2>Ingredients</h2>
-        <ul>
-          {ingredients.map(i => (
-            <li key={i.key}>
-              <div>
-                {canHoldMore
-                  ? (
-                    <a href="#" onClick={this.handleIngredientClick(i)}>
-                      {i.name}
-                    </a>
-                  )
-                  : i.name
-                }
-              </div>
-              <p>{i.description}</p>
-            </li>
-          ))}
-        </ul>
-        { Boolean(holding.length) && (
-          <div>
-            <h2>Holding</h2>
-            <ul>
-              {ingredientListForKeyList(holding).map((i, n) => (
-                <li key={n}>
-                  {i.name}
-                </li>
-              ))}
-            </ul>
-            <button onClick={this.stopHolding}>Stop Holding</button>
-            <button onClick={this.cookMeal}>Cook</button>
-          </div>
-        )}
-      </div>
+      <AppLayout>
+        <LeftColumn>
+          <h2>Ingredients</h2>
+          <ul>
+            {ingredients.map(i => (
+              <li key={i.key}>
+                <div>
+                  {canHoldMore
+                    ? (
+                      <a href="#" onClick={this.handleIngredientClick(i)}>
+                        {i.name}
+                      </a>
+                    )
+                    : i.name
+                  }
+                </div>
+                <p>{i.description}</p>
+              </li>
+            ))}
+          </ul>
+        </LeftColumn>
+        <RightColumn>
+          { Boolean(holding.length) && (
+            <div>
+              <h2>Holding</h2>
+              <ul>
+                {ingredientListForKeyList(holding).map((i, n) => (
+                  <li key={n}>
+                    {i.name}
+                  </li>
+                ))}
+              </ul>
+              <button onClick={this.stopHolding}>Stop Holding</button>
+              <button onClick={this.cookMeal}>Cook</button>
+            </div>
+          )}
+        </RightColumn>
+      </AppLayout>
     );
   }
 }
