@@ -4,6 +4,7 @@ import { Ingredient, Meal } from '../types';
 import cookMeal from '../cooking/cooking';
 import { ingredientListForKeyList, default as allIngredients } from '../cooking/all-ingredients';
 import formatEffect from './formatEffect';
+import IngredientList from './IngredientList';
 import './App.css';
 
 const AppLayout = styled.div`
@@ -80,7 +81,13 @@ class App extends React.Component<null, AppState> {
     return (
       <AppLayout>
         <LeftColumn>
-          <h2>Ingredients</h2>
+          <IngredientList
+            ingredients={ingredients}
+            selectedIngredientKey={null}
+            onClickIngredient={this.handleIngredientClick}
+            canHoldMore={canHoldMore}
+          />
+          {/*<h2>Ingredients</h2>
           <ul>
             {ingredients.map(i => (
               <li key={i.key}>
@@ -97,7 +104,7 @@ class App extends React.Component<null, AppState> {
                 <p>{i.description}</p>
               </li>
             ))}
-          </ul>
+          </ul>*/}
         </LeftColumn>
         <RightColumn>
           { Boolean(holding.length) && (
