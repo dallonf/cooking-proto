@@ -2,12 +2,14 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Ingredient, Meal } from '../types';
 import cookMeal from '../cooking/cooking';
-import { ingredientListForKeyList, default as allIngredients } from '../cooking/all-ingredients';
+import { ingredientForKey, ingredientListForKeyList, default as allIngredients } from '../cooking/all-ingredients';
 import formatEffect from './formatEffect';
 import IngredientList from './IngredientList';
+import IngredientDetailPanel from './IngredientDetailPanel';
 import './App.css';
 
 const AppLayout = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -17,7 +19,11 @@ const LeftColumn = styled.div`
 `;
 const RightColumn = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
+
+const Spacer = styled.div` flex: 1; `;
 
 interface AppState {
   ingredients: string[];
@@ -29,7 +35,7 @@ interface AppState {
 class App extends React.Component<null, AppState> {
   state: AppState = {
     ingredients: [...allIngredients.map(i => i.key)],
-    hoverIngredientKey: null,
+    hoverIngredientKey: 'rockSalt',
     holding: [],
     cookedMeal: null,
   };
@@ -45,10 +51,11 @@ class App extends React.Component<null, AppState> {
     hoverIngredientKey: ingredient.key,
   })
 
-  handleHoverEnd = (ingredient: Ingredient) => this.setState((prevState: AppState) => {
-    if (prevState.hoverIngredientKey === ingredient.key) return { hoverIngredientKey: null };
-    else return null;
-  })
+  handleHoverEnd = () => {}; // no-op
+  // handleHoverEnd = (ingredient: Ingredient) => this.setState((prevState: AppState) => {
+  //   if (prevState.hoverIngredientKey === ingredient.key) return { hoverIngredientKey: null };
+  //   else return null;
+  // })
 
   stopHolding = () => {
     this.setState({ holding: [] });
@@ -116,6 +123,8 @@ class App extends React.Component<null, AppState> {
               <button onClick={this.cookMeal}>Cook</button>
             </div>
           )}
+          <Spacer />
+          <IngredientDetailPanel ingredient={hoverIngredientKey ? ingredientForKey(hoverIngredientKey) : null} />
         </RightColumn>
       </AppLayout>
     );

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { LINE } from './colors';
+import { LINE_COLOR } from './styles';
 
 const Fullscreen = styled.div`
   display: flex;
@@ -15,14 +15,18 @@ const AppWrapper = styled.div`
   height: 720px;
   overflow: hidden;
   align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
 `;
 
 interface LetterboxBarProps { direction?: 'top' | 'bottom'; };
 const LetterboxBar = styled.div`
   flex: 1;
   background: rgba(0,0,0,0.2);
-  border-bottom: ${ (props: LetterboxBarProps) => props.direction === 'top' ? `2px ${LINE} solid` : 'none' }
-  border-top: ${ (props: LetterboxBarProps) => props.direction === 'bottom' ? `2px ${LINE} solid` : 'none' }
+  border-bottom: ${ (props: LetterboxBarProps) => props.direction === 'top' ? `2px ${LINE_COLOR} solid` : 'none' }
+  border-top: ${ (props: LetterboxBarProps) => props.direction === 'bottom' ? `2px ${LINE_COLOR} solid` : 'none' }
 `;
 
 const OuterStyling = ({ children }:{ children?: React.ReactNode }) => (

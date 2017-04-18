@@ -3,7 +3,7 @@ import { matchIngredients } from './triggers';
 
 const rockSalt: MakeIngredientInput = {
     name: 'Rock Salt',
-    description: 'Enhances the flavor of many dishes',
+    description: 'Enhances the flavor of many dishes.',
     hearts: 1,
     primaryAttribute: {
       trigger: () => true,
