@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Ingredient, Meal } from '../types';
 import cookMeal from '../cooking/cooking';
 import { ingredientForKey, ingredientListForKeyList, default as allIngredients } from '../cooking/all-ingredients';
-import formatEffect from './formatEffect';
+import MealModal from './MealModal';
 import IngredientList from './IngredientList';
 import IngredientDetailPanel from './IngredientDetailPanel';
 import CurrentRecipeList from './CurrentRecipeList';
@@ -37,8 +37,8 @@ class App extends React.Component<null, AppState> {
   state: AppState = {
     ingredients: [...allIngredients.map(i => i.key)],
     hoverIngredientKey: null,
-    holding: ['rockSalt', 'octorokTentacle', 'duck', 'apple'],
-    cookedMeal: null,
+    holding: [],
+    cookedMeal: cookMeal([ingredientForKey('apple'), ingredientForKey('apple'), ingredientForKey('rockSalt')]),
   };
 
   handleIngredientClick = (ingredient: Ingredient) => (e: React.MouseEvent<HTMLElement>) => {
@@ -106,19 +106,7 @@ class App extends React.Component<null, AppState> {
 
     if ( cookedMeal ) {
       return (
-        <div>
-          <h2>{cookedMeal.name}</h2>
-          <ul>
-            <li>Heals {cookedMeal.hearts} hearts</li>
-            { cookedMeal.effects.map((e, i) => 
-              <li key={i}>{formatEffect(e)}</li>
-            ) }
-          </ul>
-          <p>
-            {cookedMeal.description}
-          </p>
-          <button onClick={this.confirmMeal}>OK</button>
-        </div>
+        <MealModal meal={cookedMeal} onConfirm={this.confirmMeal} />
       );
     }
 
