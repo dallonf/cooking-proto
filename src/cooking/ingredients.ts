@@ -41,7 +41,7 @@ const octorokTentacle: MakeIngredientInput = {
 };
 const duck: MakeIngredientInput = {
     name: 'Duck',
-    description: 'Zora love the flavor of this water fowl.' + 
+    description: 'Zora love the flavor of this water fowl. ' + 
       'They insist that with some fruits or veggies, it makes them swim faster. ' +
       'But you don\'t think it would mix well with Rito cuisine for some reason...',
     hearts: 5,
