@@ -28,7 +28,7 @@ const Spacer = styled.div` flex: 1; `;
 
 interface AppState {
   ingredients: string[];
-  hoverIngredientKey: string | null;
+  hoverIngredientKey: { type: 'key', value: string } | { type: 'heldIndex', value: number } | null;
   holding: string[];
   cookedMeal: Meal | null;
 }
@@ -36,7 +36,7 @@ interface AppState {
 class App extends React.Component<null, AppState> {
   state: AppState = {
     ingredients: [...allIngredients.map(i => i.key)],
-    hoverIngredientKey: 'rockSalt',
+    hoverIngredientKey: null,
     holding: ['rockSalt', 'octorokTentacle', 'duck', 'apple'],
     cookedMeal: null,
   };
@@ -49,27 +49,57 @@ class App extends React.Component<null, AppState> {
   }
 
   handleHoverIngredient = (ingredient: Ingredient) => this.setState({
-    hoverIngredientKey: ingredient.key,
+    hoverIngredientKey: {
+      type: 'key',
+      value: ingredient.key
+    },
   })
 
   // tslint:disable-next-line no-empty
   handleHoverEnd = () => {};
 
+  handleHoverHeldItem = (index: number) => this.setState({
+    hoverIngredientKey: {
+      type: 'heldIndex',
+      value: index,
+    },
+  })
+
   stopHolding = () => {
-    this.setState({ holding: [] });
+    this.setState((prevState: AppState) => {
+      const update: Partial<AppState> = { holding: [] };
+      if (prevState.hoverIngredientKey && prevState.hoverIngredientKey.type === 'heldIndex') {
+        update.hoverIngredientKey = null;
+      }
+      return update;
+    });
   }
 
   cookMeal = () => {
     this.setState((state: AppState) => {
       const cookedMeal = cookMeal(ingredientListForKeyList(state.holding));
-      return {
-        cookedMeal,
-        holding: [],
-      };
+      const update: Partial<AppState> = { cookedMeal, holding: [] };
+      if (state.hoverIngredientKey && state.hoverIngredientKey.type === 'heldIndex') {
+        update.hoverIngredientKey = null;
+      }
+      return update;
     });
   }
 
   confirmMeal = () => this.setState(state => ({ cookedMeal: null }));
+
+  getHighlightedIngredient() {
+    const { hoverIngredientKey, holding } = this.state;
+    if (!hoverIngredientKey) return null;
+    if (hoverIngredientKey.type === 'key') {
+      return ingredientForKey(hoverIngredientKey.value);
+    } else if (hoverIngredientKey.type === 'heldIndex') {
+      const key = holding[hoverIngredientKey.value];
+      return ingredientForKey(key);
+    } else {
+      return null;
+    }
+  }
 
   render() {
     const { holding, cookedMeal, hoverIngredientKey } = this.state;
@@ -99,7 +129,9 @@ class App extends React.Component<null, AppState> {
         <LeftColumn>
           <IngredientList
             ingredients={ingredients}
-            hoverIngredientKey={hoverIngredientKey}
+            hoverIngredientKey={
+              hoverIngredientKey && hoverIngredientKey.type === 'key' ? hoverIngredientKey.value : null
+            }
             onClickIngredient={this.handleIngredientClick}
             canHoldMore={canHoldMore}
             onHoverIngredient={this.handleHoverIngredient}
@@ -109,11 +141,13 @@ class App extends React.Component<null, AppState> {
         <RightColumn>
           <CurrentRecipeList
             ingredients={ingredientListForKeyList(holding)}
+            hoverIndex={hoverIngredientKey && hoverIngredientKey.type === 'heldIndex' ? hoverIngredientKey.value : null}
+            onHoverItem={this.handleHoverHeldItem}
             onCookMeal={this.cookMeal}
             onStopHolding={this.stopHolding}
           />
           <Spacer />
-          <IngredientDetailPanel ingredient={hoverIngredientKey ? ingredientForKey(hoverIngredientKey) : null} />
+          <IngredientDetailPanel ingredient={this.getHighlightedIngredient()} />
         </RightColumn>
       </AppLayout>
     );
