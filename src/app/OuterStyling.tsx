@@ -11,8 +11,9 @@ const Fullscreen = styled.div`
 `;
 
 const AppWrapper = styled.div`
-  width: 1366px;
+  width: ${1366 + 16}px;
   height: 720px;
+  padding: 0 8px;
   overflow: hidden;
   align-self: center;
   display: flex;

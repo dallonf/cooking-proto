@@ -6,6 +6,7 @@ import { ingredientForKey, ingredientListForKeyList, default as allIngredients }
 import formatEffect from './formatEffect';
 import IngredientList from './IngredientList';
 import IngredientDetailPanel from './IngredientDetailPanel';
+import CurrentRecipeList from './CurrentRecipeList';
 import './App.css';
 
 const AppLayout = styled.div`
@@ -36,7 +37,7 @@ class App extends React.Component<null, AppState> {
   state: AppState = {
     ingredients: [...allIngredients.map(i => i.key)],
     hoverIngredientKey: 'rockSalt',
-    holding: [],
+    holding: ['rockSalt', 'octorokTentacle', 'duck', 'apple'],
     cookedMeal: null,
   };
 
@@ -51,11 +52,8 @@ class App extends React.Component<null, AppState> {
     hoverIngredientKey: ingredient.key,
   })
 
-  handleHoverEnd = () => {}; // no-op
-  // handleHoverEnd = (ingredient: Ingredient) => this.setState((prevState: AppState) => {
-  //   if (prevState.hoverIngredientKey === ingredient.key) return { hoverIngredientKey: null };
-  //   else return null;
-  // })
+  // tslint:disable-next-line no-empty
+  handleHoverEnd = () => {};
 
   stopHolding = () => {
     this.setState({ holding: [] });
@@ -109,20 +107,11 @@ class App extends React.Component<null, AppState> {
           />
         </LeftColumn>
         <RightColumn>
-          { Boolean(holding.length) && (
-            <div>
-              <h2>Holding</h2>
-              <ul>
-                {ingredientListForKeyList(holding).map((i, n) => (
-                  <li key={n}>
-                    {i.name}
-                  </li>
-                ))}
-              </ul>
-              <button onClick={this.stopHolding}>Stop Holding</button>
-              <button onClick={this.cookMeal}>Cook</button>
-            </div>
-          )}
+          <CurrentRecipeList
+            ingredients={ingredientListForKeyList(holding)}
+            onCookMeal={this.cookMeal}
+            onStopHolding={this.stopHolding}
+          />
           <Spacer />
           <IngredientDetailPanel ingredient={hoverIngredientKey ? ingredientForKey(hoverIngredientKey) : null} />
         </RightColumn>

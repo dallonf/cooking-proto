@@ -19,7 +19,7 @@ export interface BuffDurationEffect {
 }
 export type Effect = BuffEffect | HeartEffect | BuffDurationEffect;
 
-interface IngredientAttribute {
+export interface IngredientAttribute {
   readonly trigger: (recipe: ReadonlyArray<Ingredient>) => boolean;
   readonly triggerDescription?: string;
   readonly effect: Effect;

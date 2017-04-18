@@ -48,7 +48,13 @@ export default function formatEffect(effect: Effect) {
     return `A ${level} ${buffType} for ${formatTime(effect.duration)}`;
   } else if (effect.type === 'buffDurationIncrease') {
     return `Increases other effects by ${formatTime(effect.amount)}`;
+  } else if (effect.type === 'hearts') {
+    if (effect.amount > 0) {
+      return `Recovers ${effect.amount} additional hearts`;
+    } else {
+      return `Takes away ${Math.abs(effect.amount)} hearts`;
+    }
   } else {
-    throw new Error(`Unexpected effect type "${effect.type}"`);
+    throw new Error(`Unexpected effect type "${(effect as Effect).type}"`);
   }
 }

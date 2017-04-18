@@ -40,15 +40,17 @@ const IngredientBox = styled.li`
   width: 82px;
   height: 82px;
   overflow: hidden;
-  background: ${  (props: IngredientBoxProps) => props.hover ? 'rgba(0,0,0,0.8)' : styles.PANEL_BG_COLOR };
-  box-shadow: ${  (props: IngredientBoxProps) => props.hover ? `
-    0 0 0 1px white,
-    0 0 4px 2px rgba(255,255,255,0.6), 0 0 4px 0 rgba(255,255,255,0.6) inset,
-    0 0 10px 4px rgba(255,255,255,0.4)
-  ` : styles.PANEL_OUTLINE_SHADOW
+  background: ${(props: IngredientBoxProps) => props.hover ? 'rgba(0,0,0,0.8)' : styles.PANEL_BG_COLOR};
+  box-shadow: ${(props: IngredientBoxProps) =>
+    props.hover ? styles.PANEL_HIGHLIGHT_SHADOW : styles.PANEL_OUTLINE_SHADOW
   };
+  ${styles.TRANSITION}
   margin-right: 15px;
   margin-bottom: 15px;
+
+  &:active {
+    background: rgba(255,255,255,0.8);
+  }
 `;
 
 const IngredientList = ({

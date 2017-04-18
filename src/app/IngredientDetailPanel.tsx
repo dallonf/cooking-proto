@@ -1,13 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Ingredient, FoodType, FlavorProfile } from '../types';
+import { Ingredient, FoodType, FlavorProfile, IngredientAttribute } from '../types';
 import formatEffect from './formatEffect';
 import * as styles from './styles';
 
 const Panel = styled.div`
   background: ${styles.PANEL_BG_COLOR};
   box-shadow: ${styles.PANEL_OUTLINE_SHADOW};
-  margin-right: 8px;
   margin-bottom: 40px;
   padding: 8px 24px;
 `;
@@ -90,6 +89,18 @@ const formatFlavorProfile = (flavorProfile: FlavorProfile) => {
   }
 }
 
+const EffectLine = ({ attribute, label }: { attribute?: IngredientAttribute, label: string }) =>
+  attribute ? (
+    <div style={{ marginBottom: 4 }}>
+      <strong>{label}</strong>
+      {attribute.triggerDescription &&
+        <span> - {attribute.triggerDescription}</span>
+      }
+      &nbsp; &nbsp;
+      <Tag>{formatEffect(attribute.effect)}</Tag>
+    </div>) : <div />
+;
+
 const ingredientHasEffect = (ingredient: Ingredient) =>
   ingredient.commonAttribute || ingredient.specialAttribute || ingredient.negativeAttribute;
 
@@ -105,16 +116,9 @@ const IngredientDetailPanel = ({ ingredient }: { ingredient: Ingredient | null }
       <Description>{ingredient.description}</Description>
       {ingredientHasEffect(ingredient) && (
         <EffectsPanel>
-          { ingredient.commonAttribute && (
-            <div>
-              <strong>Common Effect</strong>
-              {ingredient.commonAttribute.triggerDescription &&
-                <span> - {ingredient.commonAttribute.triggerDescription}</span>
-              }
-              &nbsp; &nbsp;
-              <Tag>{formatEffect(ingredient.commonAttribute.effect)}</Tag>
-            </div>
-          )}
+          <EffectLine attribute={ingredient.commonAttribute} label="Common Effect" />
+          <EffectLine attribute={ingredient.specialAttribute} label="Special Effect" />
+          <EffectLine attribute={ingredient.negativeAttribute} label="Negative Effect" />
         </EffectsPanel>
       )}
     </Panel>

@@ -23,6 +23,7 @@ const octorokTentacle: MakeIngredientInput = {
     foodTypes: 'protein',
     commonAttribute: {
       trigger: matchIngredients(i => i.key === 'rockSalt', 1),
+      triggerDescription: 'Rock Salt',
       effect: {
         type: 'buff',
         buffType: 'defenseUp',
@@ -33,6 +34,7 @@ const octorokTentacle: MakeIngredientInput = {
     negativeAttribute: {
       trigger: recipe => recipe
         .filter(i => i.foodTypes.indexOf('protein') !== -1 && i.key !== 'octorokTentacle').length < 1,
+      triggerDescription: 'No other Protein',
       effect: {
         type: 'hearts',
         amount: -15,
@@ -49,6 +51,7 @@ const duck: MakeIngredientInput = {
     foodTypes: 'protein',
     commonAttribute: {
       trigger: matchIngredients(i => i.foodTypes.indexOf('produce') !== -1, 1),
+      triggerDescription: 'Produce',
       effect: {
         type: 'buff',
         buffType: 'speed',
@@ -58,6 +61,7 @@ const duck: MakeIngredientInput = {
     },
     negativeAttribute: {
       trigger: matchIngredients(i => i.cuisine === 'rito', 1),
+      triggerDescription: 'Rito',
       effect: {
         type: 'buff',
         buffType: 'stealth',
@@ -75,7 +79,8 @@ const bread: MakeIngredientInput = {
     cuisine: 'hylian',
     foodTypes: 'carb',
     commonAttribute: {
-      trigger: matchIngredients(i => i.cuisine === 'hylian' && i.key !== 'bread', 1),
+      trigger: matchIngredients(i => i.cuisine === 'hylian'),
+      triggerDescription: 'Hylian',
       effect: {
         type: 'buff',
         buffType: 'speed',
@@ -85,6 +90,7 @@ const bread: MakeIngredientInput = {
     },
     specialAttribute: {
       trigger: matchIngredients(i => i.foodTypes.indexOf('protein') !== -1, 1),
+      triggerDescription: 'Protein',
       effect: {
         type: 'buff',
         buffType: 'defenseUp',
@@ -104,6 +110,7 @@ const apple: MakeIngredientInput = {
     flavorProfiles: ['sweet'],
     commonAttribute: {
       trigger: matchIngredients(i => i.flavorProfiles.indexOf('sweet') !== -1 && i.key !== 'apple', 1),
+      triggerDescription: 'Sweet',
       effect: {
         type: 'buff',
         buffType: 'attackUp',
@@ -113,6 +120,7 @@ const apple: MakeIngredientInput = {
     },
     specialAttribute: {
       trigger: matchIngredients(i => i.key === 'apple'),
+      triggerDescription: 'Apple',
       effect: {
         type: 'buff',
         buffType: 'speed',
@@ -123,7 +131,7 @@ const apple: MakeIngredientInput = {
 };
 const buttermilk: MakeIngredientInput = {
     name: 'Buttermilk',
-    description: 'A Hylian favorite dairy product from Lon Lon Ranch.' +
+    description: 'A Hylian favorite dairy product from Lon Lon Ranch. ' +
       'Its acidic flavor increases your attack strength - but you can mix it with something sweet to ' +
       'massively increase the duration of other effects.',
     hearts: 1,
@@ -132,6 +140,7 @@ const buttermilk: MakeIngredientInput = {
     flavorProfiles: 'acidic',
     commonAttribute: {
       trigger: matchIngredients(i => i.flavorProfiles.indexOf('sweet') !== -1, 1),
+      triggerDescription: 'Sweet',
       effect: {
         type: 'buffDurationIncrease',
         amount: 500,
@@ -166,6 +175,7 @@ const creme: MakeIngredientInput = {
   },
   negativeAttribute: {
     trigger: matchIngredients(i => i.flavorProfiles.indexOf('acidic') !== -1, 1),
+    triggerDescription: 'Acidic',
     effect: {
       type: 'hearts',
       amount: -10,
@@ -191,6 +201,7 @@ const artichoke: MakeIngredientInput = {
     },
     negativeAttribute: {
       trigger: matchIngredients(i => i.flavorProfiles.indexOf('sweet') !== -1, 1),
+      triggerDescription: 'Sweet',
       effect: {
         type: 'hearts',
         amount: -10
@@ -212,6 +223,7 @@ const tortilla: MakeIngredientInput = {
         level: 2,
       },
       trigger: matchIngredients(i => i.cuisine === 'gerudo'),
+      triggerDescription: 'Gerudo',
     },
 };
 const pepper: MakeIngredientInput = {
@@ -242,6 +254,7 @@ const silentShroom: MakeIngredientInput = {
   foodTypes: ['produce', 'protein'],
   commonAttribute: {
     trigger: matchIngredients(i => i.foodTypes.indexOf('protein') !== -1),
+    triggerDescription: 'Protein',
     effect: {
       type: 'buff',
       buffType: 'stealth',
