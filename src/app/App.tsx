@@ -21,6 +21,7 @@ const RightColumn = styled.div`
 
 interface AppState {
   ingredients: string[];
+  hoverIngredientKey: string | null;
   holding: string[];
   cookedMeal: Meal | null;
 }
@@ -28,6 +29,7 @@ interface AppState {
 class App extends React.Component<null, AppState> {
   state: AppState = {
     ingredients: [...allIngredients.map(i => i.key)],
+    hoverIngredientKey: null,
     holding: [],
     cookedMeal: null,
   };
@@ -38,6 +40,15 @@ class App extends React.Component<null, AppState> {
       holding: [...state.holding, ingredient.key]
     }));
   }
+
+  handleHoverIngredient = (ingredient: Ingredient) => this.setState({
+    hoverIngredientKey: ingredient.key,
+  })
+
+  handleHoverEnd = (ingredient: Ingredient) => this.setState((prevState: AppState) => {
+    if (prevState.hoverIngredientKey === ingredient.key) return { hoverIngredientKey: null };
+    else return null;
+  })
 
   stopHolding = () => {
     this.setState({ holding: [] });
@@ -56,7 +67,7 @@ class App extends React.Component<null, AppState> {
   confirmMeal = () => this.setState(state => ({ cookedMeal: null }));
 
   render() {
-    const { holding, cookedMeal } = this.state;
+    const { holding, cookedMeal, hoverIngredientKey } = this.state;
 
     if ( cookedMeal ) {
       return (
@@ -83,28 +94,12 @@ class App extends React.Component<null, AppState> {
         <LeftColumn>
           <IngredientList
             ingredients={ingredients}
-            selectedIngredientKey={null}
+            hoverIngredientKey={hoverIngredientKey}
             onClickIngredient={this.handleIngredientClick}
             canHoldMore={canHoldMore}
+            onHoverIngredient={this.handleHoverIngredient}
+            onHoverEnd={this.handleHoverEnd}
           />
-          {/*<h2>Ingredients</h2>
-          <ul>
-            {ingredients.map(i => (
-              <li key={i.key}>
-                <div>
-                  {canHoldMore
-                    ? (
-                      <a href="#" onClick={this.handleIngredientClick(i)}>
-                        {i.name}
-                      </a>
-                    )
-                    : i.name
-                  }
-                </div>
-                <p>{i.description}</p>
-              </li>
-            ))}
-          </ul>*/}
         </LeftColumn>
         <RightColumn>
           { Boolean(holding.length) && (

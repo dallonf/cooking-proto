@@ -25,6 +25,7 @@ const List = styled.ul`
 
 interface IngredientBoxProps {
   disabled?: boolean;
+  hover?: boolean;
 }
 const IngredientBox = styled.li`
   display: flex;
@@ -40,23 +41,30 @@ const IngredientBox = styled.li`
   height: 82px;
   overflow: hidden;
   background: rgba(0,0,0,0.8);
-  box-shadow: 0 0 0 1px ${colors.LINE}, 0 0 1px 3px rgba(0,0,0,0.8);
+  box-shadow: ${  (props: IngredientBoxProps) => props.hover ? `
+      0 0 0 1px white,
+      0 0 4px 2px rgba(255,255,255,0.6), 0 0 4px 0 rgba(255,255,255,0.6) inset,
+      0 0 10px 4px rgba(255,255,255,0.4);
+    ` : `
+      0 0 0 1px ${colors.LINE}, 0 0 1px 3px rgba(0,0,0,0.8)
+    `
+  };
   margin-right: 15px;
   margin-bottom: 15px;
-
-  ${ (props: IngredientBoxProps) => !props.disabled ? `
-    &:hover {
-      box-shadow: 0 0 0 1px white,
-        0 0 4px 2px rgba(255,255,255,0.6), 0 0 4px 0 rgba(255,255,255,0.6) inset,
-        0 0 10px 4px rgba(255,255,255,0.4);
-    }
-  ` : ''}
 `;
 
-const IngredientList = ({ ingredients, onClickIngredient, canHoldMore }: {
+const IngredientList = ({
+  ingredients,
+  onClickIngredient,
+  canHoldMore,
+  hoverIngredientKey,
+  onHoverIngredient,
+  onHoverEnd }: {
     ingredients: Ingredient[],
-    selectedIngredientKey: string | null,
+    hoverIngredientKey: string | null,
     onClickIngredient: (ingredient: Ingredient) => (e: React.MouseEvent<HTMLLIElement>) => void,
+    onHoverIngredient: (ingredient: Ingredient) => void,
+    onHoverEnd: (ingredient: Ingredient) => void,
     canHoldMore: boolean,
   }) => (
   <div>
@@ -64,7 +72,14 @@ const IngredientList = ({ ingredients, onClickIngredient, canHoldMore }: {
     <HR />
     <List>
       {ingredients.map(i => (
-        <IngredientBox key={i.key} onClick={canHoldMore ? onClickIngredient(i) : undefined} disabled={!canHoldMore}>
+        <IngredientBox 
+          key={i.key}
+          onClick={canHoldMore ? onClickIngredient(i) : undefined}
+          disabled={!canHoldMore}
+          onMouseEnter={() => onHoverIngredient(i)}
+          onMouseLeave={() => onHoverEnd(i)}
+          hover={hoverIngredientKey === i.key}
+        >
           {i.name}
         </IngredientBox>
       ))}
